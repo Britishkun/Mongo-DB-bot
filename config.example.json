@@ -1,0 +1,5 @@
+{
+    "token": "your bot token",
+    "prefix": "?",
+    "Mongo uri": "Mongo url"
+}
