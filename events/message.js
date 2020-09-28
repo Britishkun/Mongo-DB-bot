@@ -1,20 +1,24 @@
 const Discord = require('discord.js');
-const { prefix } = require('../config.json');
-
-module.exports = (client, message) => {
+const config = require('../config.json');
+const GuildModel = require("../models/guild")
+module.exports = async (client, message) => {
+    const guild = await GuildModel.findOne({ GuildID: message.guild.id })
+    
+    const prefix = guild.prefix
+    if(!prefix) prefix === "?";
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = client.commands.get(commandName)
         || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
+    
     if (!command) return;
 
     if (command.guildOnly && message.channel.type == 'dm') {
         return message.reply('I can\'t execute this command inside of DM\'s');
     };
-
+  
     if (!client.cooldowns.has(command.name)) {
         client.cooldowns.set(command.name, new Discord.Collection());
     };
