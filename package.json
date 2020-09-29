@@ -1,0 +1,29 @@
+{
+  "name": "true",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "dateformat": "^3.0.3",
+    "discord.js": "^12.3.1",
+    "glob": "^7.1.6",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.7",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tovade/Mongo-DB-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tovade/Mongo-DB-bot/issues"
+  },
+  "homepage": "https://github.com/tovade/Mongo-DB-bot#readme"
+}

@@ -11,7 +11,9 @@ module.exports = {
     category: 'Info',
     execute(client, message, args) {
         const embed = new Discord.MessageEmbed()
-            .setColor('BLUE');
+            .setColor('BLUE')
+            .addField(`My source code!`, `[code](https://github.com/tovade/Mongo-DB-bot)`)
+
 
         const cmd = message.client.commands.get(args[0]);
 

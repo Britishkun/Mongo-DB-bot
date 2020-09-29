@@ -5,7 +5,8 @@ module.exports = {
     guildOnly: true, // If true this command can only be done in server/If false command can be done in servers and dms
     cooldown: 5, // Cooldown in seconds your command has (This example has 5 seconds cooldown)
     usage: '<member>', // Usage of the command
-    category: 'Info', // What category your command is in
+    category: 'Info',  // What category your command is in
+    ownerOnly: false,
     execute(client ,message, args) {
     message.channel.send(`${client.ws.ping}`)
     }
