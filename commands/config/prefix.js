@@ -2,10 +2,12 @@ const guildModel = require("../../models/guild")
 module.exports = {
     name: 'prefix',
     description: 'set the prefix',
-    guildOnly: true,
+
     cooldown: 1,
-    usage: '<command>',
+    usage: '<prefix>',
     category: 'Config',
+    ownerOnly: false, 
+    nsfwOnly: false,
     async execute(client, message, args) {
         if(!message.member.hasPermission("ADMINISTRATOR"))
         return message.channel.send("You do not have the required permission `ADMINISTARTOR`")

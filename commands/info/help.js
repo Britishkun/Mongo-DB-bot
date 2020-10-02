@@ -5,10 +5,11 @@ module.exports = {
     name: 'help',
     description: 'Get help on all the commands',
     aliases: ['h'],
-    guildOnly: false,
     cooldown: 5,
     usage: '<command>',
     category: 'Info',
+    ownerOnly: false, 
+    nsfwOnly: false, 
     execute(client, message, args) {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
@@ -25,7 +26,8 @@ module.exports = {
             if (cmd.aliases ? cmd.aliases.length : null) data.push(`**Aliases:** ${cmd.aliases.map(a => `\`${a}\``).join(', ')}`);
             if (cmd.usage) data.push(`**Usage:** ${prefix}${cmd.name} ${cmd.usage}`);
             if (cmd.cooldown) data.push(`**Cooldown:** ${cmd.cooldown}`);
-            if (cmd.guildOnly) data.push(`**Guild Only:** ${cmd.guildOnly ? 'Yes' : 'No'}`);
+            if (cmd.nsfwOnly) data.push(`**Nsfw Only:** ${cmd.nsfwOnly ? 'Yes' : 'No'}`);
+            if (cmd.ownerOnly) data.push(`**Owner Only:** ${cmd.ownerOnly ? 'Yes' : 'No'}`);
             if (cmd.category) data.push(`**Category:** ${cmd.category}`);
 
             embed.setDescription(data.join('\n'));

@@ -6,10 +6,13 @@
   "dependencies": {
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
+    "discord-logs": "^1.7.7",
+    "discord-xp": "^1.0.6",
     "discord.js": "^12.3.1",
     "glob": "^7.1.6",
     "moment": "^2.29.0",
     "mongoose": "^5.10.7",
+    "node-fetch": "^2.6.1",
     "nodemon": "^2.0.4"
   },
   "devDependencies": {},

@@ -1,4 +1,4 @@
 module.exports = (client) => {
     console.log('Active!');
-    client.user.setStatus("idle")
+    client.user.setStatus("offline")
 };

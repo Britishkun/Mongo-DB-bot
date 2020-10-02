@@ -7,8 +7,8 @@ module.exports = {
     usage: '<member>',
     category: 'Info', 
     ownerOnly: false, 
-    nsfwOnly: true, 
-    execute(client ,message, args) {
+    nsfwOnly: false, 
+    execute(client, message, args) {
      
     }
 };

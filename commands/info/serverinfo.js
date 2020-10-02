@@ -4,24 +4,26 @@ module.exports = {
     name: 'serverinfo', 
     description: 'Pong!', 
     aliases: ['p'], 
-    guildOnly: true, 
     cooldown: 5, 
     usage: '<member>',
     category: 'Info', 
     ownerOnly: false, 
     nsfwOnly: false, 
     async execute(client, message, args) {
-     let afkChannel = message.guild.afkChannel;
-     let afkTimeout = message.guild.afkTimeout;
+        const guild = message.guild;
+        let { 
+            afkChannel,
+            afkTimeout,
+            verified,
+            memberCount,
+        } = guild;
      let afk = afkChannel ? `${afkChannel.name}` : "This server doesnt have a afk channel!";
      let afktime = afkTimeout ? `${afkTimeout}` : "This server doesnt have a afk timeout!";
      let premiumtier = message.guild.premiumTier;
      let premiumsubs = message.guild.premiumSubscriptionCount;
      let boost = premiumtier;
      let boostLevel = premiumsubs;
-     let verifiedCheck = message.guild.verified;
-     let verified = verifiedCheck ? "Yes this server is verified" : "No this server isnt verified!"
-     let memberCount = message.guild.memberCount;
+     let verify = verified ? "Yes this server is verified" : "No this server isnt verified!"
      let owner = message.guild.owner;
      let region = message.guild.region;
      let name = message.guild.name;
@@ -31,7 +33,6 @@ module.exports = {
      let emojis = message.guild.emojis.cache.size;
      let systemChannel = message.guild.systemChannel;
      let system = systemChannel ? `${systemChannel}` : `None`
-     let x = Date.now() - message.guild.createdAt;
      let createdAt = dateformat(message.guild.createdAt);
      let roles = message.guild.roles.cache.size;
      let verificationLevel = message.guild.verificationLevel;
@@ -44,7 +45,7 @@ module.exports = {
      .addField("Member count", memberCount, true)
      .addField("Owner", owner, true)
      .addField("Region", region, true)
-     .addField("Verified", verified , true)
+     .addField("Verified", verify , true)
      .addField("Channels", channelSize, true)
      .addField("Emojis", emojis, true)
      .addField("Created at", createdAt, true)
@@ -52,6 +53,7 @@ module.exports = {
      .addField("Partnered", partner, true)
      .addField("Verification Level", verificationLevel,  true)
      .addField("System Channel", system, true)
+     .setThumbnail(message.guild.iconURL())
      message.channel.send(embed)
     }
 };

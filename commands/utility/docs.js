@@ -5,7 +5,8 @@ module.exports = {
     description: "Shows Complete Docs Of DJS",
     category: "Utility",
     aliases: ["djs"],
-
+    ownerOnly: false, 
+    nsfwOnly: false, 
     async execute(client, message, args) {
 
 const query = args.join(' ');
