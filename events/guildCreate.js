@@ -13,7 +13,8 @@ module.exports = async (client, guild) => {
         {
             GuildID: guild.id,
             welcomeChannelId: "null",
-            leaveChannelId: "null"
+            leaveChannelId: "null",
+            autoRole: "null",
         }
     )
     welcomeModel.save()

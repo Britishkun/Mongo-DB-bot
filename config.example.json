@@ -1,5 +1,6 @@
 {
     "token": "your bot token",
     "prefix": "Your prefix",
-    "Mongo uri": "Mongo url"
+    "Mongo uri": "Mongo url",
+    "ownerId": "Your owner id here"
 }

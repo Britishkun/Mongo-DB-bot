@@ -5,8 +5,11 @@ const glob = require('glob');
 const mongoose = require("mongoose")
 const logs = require("discord-logs")
 logs(client)
+const guildModel = require('./models/guild')
+client.prefix = guildModel.prefix;
 client.cooldowns = new Discord.Collection();
 client.commands = new Discord.Collection();
+client.queue = new Map();
 const commandFiles = glob.sync('./commands/**/*.js');
 for (const file of commandFiles) {
   const command = require(file);

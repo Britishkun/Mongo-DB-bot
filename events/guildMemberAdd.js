@@ -5,10 +5,13 @@ module.exports = async (client, member) => {
     const guild = await GuildModel.findOne({
         GuildID: member.guild.id,
     })
+    let autoRole = guild.autoRole;
+    if(autoRole === null) return;
     let welcomeChannel = guild.welcomeChannelId
     if(!welcomeChannel && welcomeChannelId === null) return;
     let welcomeEmbed = new MessageEmbed()
-    .setTitle(`Welcome ${member.name}`)
+    .setTitle(`Welcome ${member.user.username}`)
     .setDescription(`Welcome to ${member.guild.name}`)
     client.channels.cache.get(welcomeChannel).send(welcomeEmbed)
+    member.roles.add(autoRole)
 }

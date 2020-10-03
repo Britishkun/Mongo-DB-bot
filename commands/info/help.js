@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix } = require('../../config.json');
+const guildConfig = require("../../models/guild")
 
 module.exports = {
     name: 'help',
@@ -10,14 +10,15 @@ module.exports = {
     category: 'Info',
     ownerOnly: false, 
     nsfwOnly: false, 
-    execute(client, message, args) {
+    async execute(client, message, args) {
+        let guildModel = await guildConfig.findOne({ GuildID: message.guild.id })
+        let prefix = guildModel.prefix;
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .addField(`My source code!`, `[code](https://github.com/tovade/Mongo-DB-bot)`)
 
 
         const cmd = message.client.commands.get(args[0]);
-
         if (cmd) {
             const data = [];
 
@@ -26,8 +27,8 @@ module.exports = {
             if (cmd.aliases ? cmd.aliases.length : null) data.push(`**Aliases:** ${cmd.aliases.map(a => `\`${a}\``).join(', ')}`);
             if (cmd.usage) data.push(`**Usage:** ${prefix}${cmd.name} ${cmd.usage}`);
             if (cmd.cooldown) data.push(`**Cooldown:** ${cmd.cooldown}`);
-            if (cmd.nsfwOnly) data.push(`**Nsfw Only:** ${cmd.nsfwOnly ? 'Yes' : 'No'}`);
-            if (cmd.ownerOnly) data.push(`**Owner Only:** ${cmd.ownerOnly ? 'Yes' : 'No'}`);
+            data.push(`**Nsfw Only:** ${cmd.nsfwOnly ? 'Yes' : 'No'}`);
+            data.push(`**Owner Only:** ${cmd.ownerOnly ? 'Yes' : 'No'}`);
             if (cmd.category) data.push(`**Category:** ${cmd.category}`);
 
             embed.setDescription(data.join('\n'));

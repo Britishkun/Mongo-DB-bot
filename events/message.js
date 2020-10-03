@@ -4,7 +4,8 @@ const GuildModel = require("../models/guild")
 const Levels = require("discord-xp");
 const configModel = require("../models/welcomeLeave")
 module.exports = async (client, message) => {
-    
+     if(message.channel.type === "dm") return;
+     if(message.author.id === client.user.id || message.author.bot) return;
     const levelConfig = await configModel.findOne({ GuildID: message.guild.id })
     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
 
@@ -18,7 +19,7 @@ module.exports = async (client, message) => {
     const guildc = await GuildModel.findOne({ GuildID: message.guild.id })
     const prefix = guildc.prefix
     if(message.guild.id === null) prefix = '?';
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift();
