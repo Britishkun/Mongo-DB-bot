@@ -2,5 +2,9 @@
     "token": "your bot token",
     "prefix": "Your prefix",
     "Mongo uri": "Mongo url",
-    "ownerId": "Your owner id here"
+    "ownerId": "Your owner id here",
+    "YOUTUBE_API_KEY": "yt api key here",
+    "SOUNDCLOUD_CLIENT_ID": "soundcloud id here (optional)",
+    "MAX_PLAYLIST_SIZE": 50,
+    "PRUNING": false
 }
