@@ -1,10 +1,11 @@
+require('moment-duration-format')
 const { MessageEmbed } = require("discord.js")
+const moment = require('moment')
 module.exports = {
     name: 'botinfo', 
-    description: 'Pong!', 
-    aliases: ['p'], 
+    description: 'eeeeeeeeeeeeeeeeeeeeeeeeeeee!', 
+    aliases: ['bot'], 
     cooldown: 5, 
-    usage: '<member>',
     category: 'Info', 
     ownerOnly: false, 
     nsfwOnly: false, 
@@ -15,6 +16,10 @@ module.exports = {
      let userSize = client.users.cache.size;
      let name = client.user.username;
      let avatar = client.user.displayAvatarURL();
+     const uptime = moment
+     .duration(client.uptime)
+     .format(" D [days], H [hrs], m [mins], s [secs]");
+     let vcConnect = client.voice.connections.size;
      let embed = new MessageEmbed()
      .setTitle(`My info!`)
      .addField("My name", name, true)
@@ -22,7 +27,10 @@ module.exports = {
      .addField("Emojis", emojiSize, true)
      .addField("Servers", guildSize, true)
      .addField("Users", userSize, true)
-     .setImage(avatar)
+     .addField("Uptime", uptime, true)
+     .addField("Commands", client.commands.size, true)
+     .addField("Voice connections", vcConnect, true)
+     .setThumbnail(avatar)
      message.channel.send(embed)
     }
 };

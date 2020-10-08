@@ -14,7 +14,9 @@ module.exports = {
      .setTitle("Credits from Tovade")
      .addField("Coltz", "Has helped us fixing erros", true)
      .addField("Evobot", "For our music system", true)
-     .setImage(client.user.displayAvatarURL())
+     .addField("Ghostybot", "For most of bot commands", true)
+     .setThumbnail(client.user.displayAvatarURL())
+     .setFooter(client.footer)
      message.channel.send(embed)
     }
 };

@@ -5,4 +5,5 @@ module.exports = model(
     new Schema({
         GuildID: String,
         prefix: { type: String, default: config.prefix },
+        levelMessages: { type: Boolean, default: false },
     }));

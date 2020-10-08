@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js')
-const config = require("../../models/welcomeLeave")
+const config = require("../../models/guild")
 module.exports = {
     name: 'levelMessages', 
     description: 'toggle levelmessages!', 

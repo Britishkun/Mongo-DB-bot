@@ -8,7 +8,7 @@ module.exports = model(
         leaveChannelId: String,
         autoRole: String,
         logChannel: String,
-        levelMessages: { type: Boolean, default: false },
         modlog: String,
+        botRole: String,
     })
 )

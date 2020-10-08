@@ -6,7 +6,7 @@ module.exports = async (client, guild) => {
         users.forEach((user) => {
         Levels.deleteUser(user.id, guild.id)
     })
-    await guildModel.findOneAndRemove({ GuildID: guild.id })
-    await configModel.findOneAndRemove({ GuildID: guild.id })
+    await guildModel.findOneAndDelete({ GuildID: guild.id })
+    await configModel.findOneAndDelete({ GuildID: guild.id })
 
 }

@@ -10,6 +10,6 @@ module.exports = async (client, member) => {
     let welcomeEmbed = new MessageEmbed()
     .setTitle(`Goodbye! ${member.user.username}`)
     .setDescription(`Goodbye from ${member.guild.name}`)
-    client.channels.cache.get(welcomeChannel).send(welcomeEmbed)
+    client.channels.cache.get(welcomeChannel).send(welcomeEmbed);
     Levels.deleteUser(member.id, member.guild.id)
 }

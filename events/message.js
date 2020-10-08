@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 const config = require('../config.json');
 const GuildModel = require("../models/guild")
 const Levels = require("discord-xp");
-const configModel = require("../models/welcomeLeave")
 module.exports = async (client, message) => {
      if(message.channel.type === "dm") return;
      if(message.author.id === client.user.id || message.author.bot) return;
-    const levelConfig = await configModel.findOne({ GuildID: message.guild.id })
+    const levelConfig = await GuildModel.findOne({ GuildID: message.guild.id })
+
     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1; // Min 1, Max 30
 
     const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
