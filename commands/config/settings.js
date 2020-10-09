@@ -12,6 +12,8 @@ module.exports = {
     ownerOnly: false, 
     nsfwOnly: false, 
     async execute(client, message, args) {
+        if(!message.member.hasPermission("MANAGE_MESSAGES"))
+        return message.channel.send("You dont have the right permissions!")
      let guildFig = await guildModel.findOne({ GuildID: message.guild.id })
      let configG = await configModel.findOne({ GuildID: message.guild.id })
      let prefix = guildFig.prefix;

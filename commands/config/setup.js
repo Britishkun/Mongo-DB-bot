@@ -6,10 +6,12 @@ module.exports = {
     aliases: ['p'], 
     cooldown: 5, 
     usage: '<member>',
-    category: 'Info', 
+    category: 'Config', 
     ownerOnly: false, 
     nsfwOnly: false, 
     async execute(client, message, args) {
+        if(!message.member.hasPermission("MANAGE_MESSAGES"))
+        return message.reply("You do not have the right permissions for this!")
     const configLmao = await configModel.findOne({ GuildID: message.guild.id })
     
     if(!configLmao) {
