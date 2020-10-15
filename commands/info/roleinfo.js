@@ -10,7 +10,7 @@ module.exports = {
     ownerOnly: false, 
     nsfwOnly: false, 
     async execute(client, message, args) {
-     const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);
+     const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]) || message.member.roles.highest;
     if(!role) return message.channel.send("Please mention a role!")
      let name = role.name;
      let color = role.color;

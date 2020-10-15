@@ -1,5 +1,7 @@
 const Levels = require('discord-xp')
-const { MessageEmbed } = require("discord.js")
+const canvacord = require("canvacord")
+const Discord = require('discord.js');
+const leaderboard = require('./leaderboard');
 module.exports = {
     name: 'rank', 
     description: 'get your level!', 
@@ -15,12 +17,26 @@ module.exports = {
  
         const user = await Levels.fetch(target.id, message.guild.id); // Selects the target from the database.
          
-        if (!user) return message.channel.send("Seems like this user has not earned any xp so far."); // If there isnt such user in the database, we send a message in general.
-         let embed = new MessageEmbed()
-         .addField("User", target.tag, true)
-         .addField("Level", user.level, true)
-         .addField("XP", user.xp.toLocaleString(), true)
-         .setThumbnail(target.displayAvatarURL())
-        message.channel.send(embed); // We show the level.
+        if (!user) return message.channel.send("Seems like this user has not earned any xp so far.");
+        const req = Levels.xpFor(user.level +1);
+        const level = user.level;
+        const rank = new canvacord.Rank()
+        .registerFonts()
+        .setAvatar(target.displayAvatarURL({ format: "png" }))
+        .setCurrentXP(user.xp)
+        .setRequiredXP(req)
+        .setRank(0, "Level", false)
+        .setStatus(target.presence.status)
+        .setLevel(level)
+        .setBackground("IMAGE", "https://wallpapercave.com/wp/wp2563380.jpg")
+        .setUsername(target.username)
+        .setDiscriminator(target.discriminator)
+        .setProgressBar("#FFFFFF", "COLOR")
+
+        rank.build()
+        .then(data => {
+            const attachment = new Discord.MessageAttachment(data, "RankCard.png");
+            message.channel.send(attachment);
+        });
     }
 };

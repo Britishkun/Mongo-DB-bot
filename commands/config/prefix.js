@@ -5,7 +5,6 @@ const config = require('../../config.json')
 module.exports = {
     name: 'prefix',
     description: 'set the prefix',
-
     cooldown: 1,
     usage: '<prefix>',
     category: 'Config',
@@ -15,15 +14,16 @@ module.exports = {
         if(!message.member.hasPermission("ADMINISTRATOR"))
         return message.channel.send("You do not have the required permission `ADMINISTARTOR`")
         let congig = await configModel.findOne({ GuildID: message.guild.id })
+        const Guild = await guildModel.findOne({ GuildID: message.guild.id })
         let modlog = congig.modlog;
         let prefix = args[0]
         if(!prefix) {
-            await guildModel.findOneAndUpdate({ GuildID: message.guild.id, prefix: config.prefix })
+            await Guild.updateOne({ GuildID: message.guild.id, prefix: config.prefix })
             message.channel.send(`Prefix has been resetted to \`${config.prefix}\``)
         }
     if(prefix) {
 
-    let guild = await guildModel.findOneAndUpdate({
+    let guild = await Guild.updateOne({
         
             GuildID: message.guild.id,
             prefix: prefix,

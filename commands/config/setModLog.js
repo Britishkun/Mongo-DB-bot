@@ -13,9 +13,10 @@ module.exports = {
    async execute(client, message, args) {
        if(!message.member.hasPermission("MANAGE_CHANNELS"))
        return message.reply("You need manage channels permission!")
+       const model = welcomeModel.findOne({ GuildID: message.guild.id })
  let channel = message.mentions.channels.first()
  if(!channel) {
-     await welcomeModel.findOneAndUpdate({
+     await model.updateOne({
          GuildID: message.guild.id,
          modlog: "null",
      });
@@ -24,7 +25,7 @@ module.exports = {
  let modbed = new MessageEmbed()
  .setTitle("**modlog:** setted channel")
  .setDescription(`**moderator:** ${message.author.username}`)
- let config = await welcomeModel.findOneAndUpdate({
+ let config = await model.updateOne({
      GuildID: message.guild.id,
      modlog: channel.id,
  });

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const guildConfig = require("../../models/guild")
-
+const { ownerId } = require('../../config.json')
 module.exports = {
     name: 'help',
     description: 'Get help on all the commands',
@@ -33,22 +33,32 @@ module.exports = {
 
             embed.setDescription(data.join('\n'));
         } else {
-            const categories = new Discord.Collection();
 
-            message.client.commands.forEach(command => { 
-                const category = categories.get(command.category);
+    
+            }
+            const commands = client.commands
+            const utilCmds = commands.filter(({ category }) => category === "Utility").map(({ name }) => name).join(", ")
+            const configCmds = commands.filter(({ category }) => category === "Config").map(({ name }) => name).join(", ")
+            const funCmds = commands.filter(({ category }) => category === "Fun").map(({ name }) => name).join(", ")
+            const infoCmds = commands.filter(({ category }) => category === "Info").map(({ name }) => name).join(", ")
+            const musicCmds = commands.filter(({ category }) => category === "Music").map(({ name }) => name).join(", ")
+            const levelCmds = commands.filter(({ category }) => category === "Levels").map(({ name }) => name).join(", ")
+            const ownerCmds = commands.filter(({ category }) => category === "Owner").map(({ name }) => name).join(", ")
 
-                if (category) {
-                    category.set(command.name, command);
-                } else {
-                    categories.set(command.category, new Discord.Collection().set(command.name, command));
-                };
-            });
 
-            categories.forEach((category, name) => {
-                embed.addField(name, category.map(command => `\`${command.name}\``).join(' '));
-            });
-        };
+            embed.addField("Config", `\`${configCmds}\``)
+            .addField("Info", `\`${infoCmds}\``)
+            .addField("Fun", `\`${funCmds}\``)
+            if(message.author.id !== ownerId) {
+                embed.addField("Owner", `Ownly viewable by the owner!`)
+            } else {
+                embed.addField("Owner", `\`${ownerCmds}\``)
+            }
+            embed.addField("Levels", `\`${levelCmds}\``)
+            .addField("Music", `\`${musicCmds}\``)
+            .addField("Util", `\`${utilCmds}\``)
+    
+        
 
         message.channel.send(embed);
     }

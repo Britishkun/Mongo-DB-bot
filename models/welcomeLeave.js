@@ -10,5 +10,6 @@ module.exports = model(
         logChannel: String,
         modlog: String,
         botRole: String,
+        membercountChannel: String,
     })
 )

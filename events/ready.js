@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const { Mongo } = require("../config.json")
+const Model = require("../models/welcomeLeave")
 module.exports = async (client) => {
     console.log('Active!');
   
@@ -7,14 +8,16 @@ module.exports = async (client) => {
 
     setInterval(() => {
         const textArray = [
-            "You",
-            "with you",
-            "My prefix t!"
+            `My servers ${client.guilds.cache.size}`,
+            `My users ${client.users.cache.size}`,
+            "My friend count at 0 :O",
+            "Spotify :D"
         ]
         const activityArray = [
             "WATCHING",
-            "PLAYING",
-            "WATCHING"
+            "WATCHING",
+            "WATCHING",
+            "LISTENING"
         ]
   
         client.user.setActivity(textArray[i], { type: activityArray[i] })
@@ -27,5 +30,7 @@ module.exports = async (client) => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: true,
-    }).then(console.log("MongoDB connected"))
+    }).then(console.log("MongoDB connected"));
+
+     
 };

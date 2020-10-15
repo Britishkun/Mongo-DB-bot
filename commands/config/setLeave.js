@@ -14,19 +14,20 @@ module.exports = {
    async execute(client, message, args) {
     if(!message.member.hasPermission("MANAGE_CHANNELS"))
     return message.reply("You need manage channels permission!")
+    let congig = await configModel.findOne({ GuildID: message.guild.id })
  let channel = message.mentions.channels.first()
+
  if(!channel) {
-     await configModel.findOneAndUpdate({ GuildID: message.guild.id, leaveChannelId: "null" })
+     await congig.updateOne({ GuildID: message.guild.id, leaveChannelId: "null" })
      message.channel.send("Leave Channel reseted")
  }
  if(channel) {
- let congig = await configModel.findOne({ GuildID: message.guild.id })
  let modlog = congig.modlog;
  let embed = new MessageEmbed()
  .setTitle(`**action:** leaveChannel change`)
  .setDescription(`**Moderator:** ${message.author.username}`)
  .addField(`New channel:`, channel)
- let config = await welcomeModel.findOneAndUpdate({
+ let config = await congig.updateOne({
      GuildID: message.guild.id,
      leaveChannelId: channel.id,
  });

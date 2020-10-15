@@ -14,8 +14,9 @@ module.exports = {
        return message.reply("You need manage channels permission!")
  let channel = message.mentions.channels.first()
  if(!channel) return message.reply("Please mention a channel!")
+ let congig = await configModel.findOne({ GuildID: message.guild.id })
 
- let config = await welcomeModel.findOneAndUpdate({
+ let config = await congig.updateOne({
      GuildID: message.guild.id,
      welcomeChannelId: channel.id,
  });

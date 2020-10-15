@@ -13,15 +13,15 @@ module.exports = {
         if(!message.member.hasPermission("MANAGE_ROLES"))
         return message.reply("You need manage roles permissions!")
         const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]);
+        let congig = await configModel.findOne({ GuildID: message.guild.id })
         if(!role) {
-             await configModel.findOneAndUpdate({ GuildID: message.guild.id, autoRole: "null" }) 
+             await congig.updateOne({ GuildID: message.guild.id, autoRole: "null" }) 
             message.channel.send("AutoRole is now resetted!")}
-            let congig = await configModel.findOne({ GuildID: message.guild.id })
             let modlog = congig.modlog;
             let embed = new MessageEmbed()
             .setTitle(`**action:** autoRole change`)
             .setDescription(`**Moderator:** ${message.author.username}`)
-        let config = await configModel.findOneAndUpdate({
+        let config = await congig.updateOne({
             GuildID: message.guild.id,
             autoRole: role.id || role,
         })
